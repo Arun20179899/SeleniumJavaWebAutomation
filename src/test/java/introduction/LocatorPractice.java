@@ -38,8 +38,8 @@ public class LocatorPractice {
         String welcomeData = driver.findElement(By.xpath("//div/h2")).getText();
         String confirmData = driver.findElement(By.cssSelector("div p")).getText();
         String actualUser = getUserName(welcomeData);
-        Assert.assertEquals(actualUser,"Arun");
-        Assert.assertEquals(confirmData,"You are successfully logged in.");
+        Assert.assertEquals(actualUser, "Arun");
+        Assert.assertEquals(confirmData, "You are successfully logged in.");
         driver.findElement(By.cssSelector("button[class='logout-btn']")).click();
 
         driver.close();
@@ -51,6 +51,7 @@ public class LocatorPractice {
         System.out.println(splitData[1].split("'")[0]);
         return splitData[1].split("'")[0];
     }
+
     public static String getUserName(String key) {
         String[] splitData = key.split(" ");
         System.out.println(splitData[1].split(",")[0]);
