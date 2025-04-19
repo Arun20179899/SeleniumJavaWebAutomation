@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class LocatorPractice {
     public static void main(String[] args) throws InterruptedException {
-        String userName = "Arun";
+        String userName = "Arun Gowda A S";
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -38,7 +38,7 @@ public class LocatorPractice {
         String welcomeData = driver.findElement(By.xpath("//div/h2")).getText();
         String confirmData = driver.findElement(By.cssSelector("div p")).getText();
         String actualUser = getUserName(welcomeData);
-        Assert.assertEquals(actualUser, "Arun");
+        Assert.assertEquals(welcomeData, "Hello "+userName+",");
         Assert.assertEquals(confirmData, "You are successfully logged in.");
         driver.findElement(By.cssSelector("button[class='logout-btn']")).click();
 
