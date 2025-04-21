@@ -21,11 +21,11 @@ public class Calender {
         System.out.println(driver.findElement(By.id("Div1")).getDomAttribute("style"));
         driver.findElement(By.id("ctl00_mainContent_rbtnl_Trip_1")).click();
         System.out.println(driver.findElement(By.id("Div1")).getDomAttribute("style"));
-        if (driver.findElement(By.id("Div1")).getDomAttribute("style").contains("1")) {
-            System.out.println("it is enabled");
+        if (driver.findElement(By.id("Div1")).getDomAttribute("style").contains("0.5")) {
+            System.out.println("it is disabled");
             Assert.assertTrue(true);
         } else {
-            System.out.println("not enabled");
+            System.out.println("it is enabled");
             Assert.assertFalse(false);
         }
     }
