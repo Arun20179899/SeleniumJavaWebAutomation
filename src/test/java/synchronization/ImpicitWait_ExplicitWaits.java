@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -12,8 +14,12 @@ import java.util.concurrent.TimeUnit;
 
 public class ImpicitWait_ExplicitWaits {
     public static void main(String[] args) throws InterruptedException {
+        String promoCode = "rahulshettyacademy";
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//        Implicit Waits
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+//        Explicit Waits
+        WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().window().maximize();
         String[] itemsNeeded = {"Beans", "Brocolli", "Cucumber", "Beetroot", "Carrot"};
         driver.get("https://rahulshettyacademy.com/seleniumPractise/");
@@ -21,7 +27,13 @@ public class ImpicitWait_ExplicitWaits {
         addItems(driver, itemsNeeded);
         driver.findElement(By.xpath("//img[@alt='Cart']")).click();
         driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
-        driver.findElement(By.cssSelector(".promoCode")).sendKeys("Arun435ED09");
+        w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".promoCode"))); // Waits defined Explicitly
+        driver.findElement(By.cssSelector(".promoCode")).sendKeys(promoCode);
+        driver.findElement(By.xpath("//button[@class='promoBtn']")).click();
+        w.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".promoInfo"))); // Waits defined Explicitly
+        System.out.println(driver.findElement(By.cssSelector(".promoInfo")).getText());
+        driver.close();
+
 
     }
 
