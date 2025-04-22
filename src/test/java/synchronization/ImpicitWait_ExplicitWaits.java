@@ -1,24 +1,33 @@
-package functionaltesting;
+package synchronization;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class AddToCart {
+public class ImpicitWait_ExplicitWaits {
     public static void main(String[] args) throws InterruptedException {
-//        I have validated this for 4 times and after that block should go out
-        int j = 0;
         WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
         String[] itemsNeeded = {"Beans", "Brocolli", "Cucumber", "Beetroot", "Carrot"};
         driver.get("https://rahulshettyacademy.com/seleniumPractise/");
         Thread.sleep(3000);
-//        //button[text()='ADD TO CART']
+        addItems(driver, itemsNeeded);
+        driver.findElement(By.xpath("//img[@alt='Cart']")).click();
+        driver.findElement(By.xpath("//button[text()='PROCEED TO CHECKOUT']")).click();
+        driver.findElement(By.cssSelector(".promoCode")).sendKeys("Arun435ED09");
+
+    }
+
+    public static void addItems(WebDriver driver, String[] itemsNeeded) throws InterruptedException {
+        int j = 0;
+        //        //button[text()='ADD TO CART']
 //        grab all the products and store it variable
         List<WebElement> products = driver.findElements(By.cssSelector("h4[class='product-name']"));
         for (int i = 0; i < products.size(); i++) {
@@ -46,6 +55,5 @@ public class AddToCart {
             }
 
         }
-//        driver.findElement(By.cssSelector(".cart-icon")).click();
     }
 }
